@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Coding Online Class</title>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+
+  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+<!-- font awesome cdn link  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+<!--custom css file link  -->
+<link rel="stylesheet" href="css/style.css">
+
+
+    <style>
+      .modal {
+         display: none;
+         position: fixed;
+         z-index: 1000;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         justify-content: center;
+         align-items: center;
+     }
+
+     .spinner {
+         border: 8px solid #f3f3f3;
+         border-top: 8px solid #3498db;
+         border-radius: 50%;
+         width: 100px;
+         height: 100px;
+         animation: spin 1s linear infinite;
+     }
+
+     @keyframes spin {
+         0% { transform: rotate(0deg); }
+         100% { transform: rotate(360deg); }
+     }
+      
+
+    </style>  
+
+</head>
+<body>
+        
+   
+   <section class="form-container"  id="form-area">
+                 <form id="registerForm" class="">
+               
+                <img src="img/register.png" alt="User Login" class="login-image" style="height: 200px;width: auto;"> <!-- Change the image URL as needed -->
+                <h3>สร้างบัญชีผู้ใช้</h3>
+                <div class="">
+                  <p><span><img src="/img/email.svg" style="margin-right: 5px;"></span>อีเมล <span>*</span></p>
+                    <input type="email" placeholder="ป้อนอีเมลของคุณ" name="email" class="box"required>
+                </div>
+                <div class="">
+                  <p><span><img src="/img/password.svg" style="margin-right: 5px;"></span>รหัสผ่าน<span>*</span></p>
+                    <input type="password" placeholder="ป้อนรหัสผ่านของคุณ" name="password" class="box"required>
+                </div>
+                <div class="form-group my-3">
+                    <button type="submit" class="btn btn-primary" >ลงทะเบียน</button>
+                </div>
+                <div class="form-group my-3">
+                    <button type="button" id="btn-Cancel" class="btn2" s>ยกเลิก</button>
+                </div>
+                <div class="form-group my-3">
+                    <a style="padding: 12px; font-size: 12px;"><i class="fas fa-user" style="padding: 12px; font-size: 12px;"></i>เข้าสู่ระบบอัตโนมัติเมื่อลงทะเบียนสำเร็จ..</a>
+                </div>
+            </form>
+                
+       
+            <form id="loginForm" class="sub-form">
+                <img src="img/login.png" alt="User Login" class="login-image"> <!-- Change the image URL as needed -->
+                <h3>เข้าสู่ระบบ</h3>
+                <div class="form-group" >
+                   <p>
+                     <span><img src="/img/email.svg" style="margin-right: 5px;"></span>อีเมล <span>*</span></p>
+                    <input type="email" placeholder="ป้อนอีเมลของคุณ" name="email" class="box"required>
+                </div>
+                <div class="form-group">
+                   
+                    <p><span><img src="/img/password.svg" style="margin-right: 5px;"></span>รหัสผ่าน <span>*</span></p>
+                    <input type="password" placeholder="ป้อนรหัสผ่านของคุณ" name="password" class="box" required>
+                </div>
+                <div class="form-group ">
+                    <button id="loginButton"  type="submit" class="btn"  >เข้าสู่ระบบ</button>
+                </div>
+                <div class="form-group ">
+                    <button id="btn-register"  type="button" class="btn" >ลงทะเบียนใหม่</button>
+                </div>
+                <div class="form-group ">
+                  <button id="google-login-btn"  type="button" class="btn2" ><i class="fa-brands fa-google" style="margin-right: 10px;"></i>เข้าระบบด้วย Gooogle</button>
+              </div>
+                <div class="form-group my-3 ">
+                  <a style="padding: 12px; font-size: 12px;"><i class="fas fa-user" style="padding: 12px; font-size: 12px;"></i>หากยังไม่มีบัญชีผู้ใช้ให้เลือกปุ่มลงทะเบียนใหม่..</a>
+               </div>
+               </form>
+               
+
+                   <div style=" text-align:center; margin-top: 20px; font-weight: 400; font-size: 15px; color: #868282;" ><img src="img/firebase.png" style="background-color:none;" width="30px" height="auto">พัฒนาบน firebase | Database | Authentication</div>
+       
+      </section>
+
+      
+
+
+        <div id="profile" class="profile-card">
+       <!-- <h3 id="welcome">สวัสดีผู้ใช้ระบบ</h3>-->
+
+            <!--ส่วนแสดงผลหน้าเว็บไซตหลักเมื่อผ่านการล็อกอิน-->
+
+                <header class="header">
+   
+                    <section class="flex">
+                 
+                       <a href="home.html" class="logo">ห้องเรียนโค้ดดิ้งครูศิวพล</a>
+                 
+                       <form action="search.html" method="post" class="search-form">
+                          <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+                          <button type="submit" class="fas fa-search"></button>
+                             
+                       </form>
+                 
+                       <div class="icons">
+                        <div id="menu-btn" class="fas fa-bars"></div>
+                          <div id="search-btn" class="fas fa-search"></div>
+                          <div id="toggle-btn" class="fas fa-sun"></div>
+                          <div id="user-btn" class="fas fa-user"></div>
+                          
+                        </div>
+                        
+                 
+                       <div class="profile">
+                          <img src="images/pic-1.jpg" class="image" alt="">
+                          <h3 class="name">ครูประจำห้องเรียน</h3>
+                          <h3 id="welcome2">สวัสดีผู้ใช้ระบบ</h3>
+                         <!-- <a href="profile.html" class="btn">แสดงโปรไฟล์</a>-->
+                         
+                          <div class="flex-btn">
+                            
+                          </div>
+                         <!--<div class="icons">  <a id="logout2" class="btn">ออกจากระบบ</a> </div>-->
+                          <div style="margin-top:20px; margin: button 10px;"  class="icons">  <a  id="logout" class="btn">ออกจากระบบ</a> </div>
+                       </div>
+                 
+                    </section>
+                 
+                 </header>  
+
+                 <div class="side-bar">
+
+                    <div id="close-btn">
+                       <i class="fas fa-times"></i>
+                    </div>
+                 
+                    <div class="profile">
+
+                       <img src="images/pic-1.jpg" class="image1" style="width:150px; height: 150px; border-radius: 50%;" alt="">
+                       <h3 class="name">ครูประจำห้องเรียน</h3>
+                     <!--  <a href="profile.html" class="btn">แสดงโปรไฟล์</a>-->
+                       <h3 id="welcome">สวัสดีผู้ใช้ระบบ</h3><!--ส่วนนี้ดึงอีเมลที่ล็อกอินมาแสดงผล-->
+                     
+                    </div>
+                 
+                    <nav class="navbar">
+                       <a href="index.html"><i class="fas fa-home"></i><span>หน้าแรก</span></a>
+                       <a href="#"><i class="fas fa-question"></i><span>เกี่ยวกับห้องเรียน</span></a>
+                       <a href="#"><i class="fas fa-graduation-cap"></i><span>เนื้อหาทั้งหมด</span></a>
+                       <a href="#"><i class="fas fa-chalkboard-user"></i><span>ครูประจำวิชา</span></a>
+                       <a  href="student/index.html"><i class="fas fa-graduation-cap"></i><span>ลงทะเบียนนักเรียน</span></a>
+                       <a href="#"><i class="fas fa-headset"></i><span>ติดต่อครูผู้สอน</span></a>
+                       <a href="editor2.html" target="_self"><i class="fas fa-headset"></i><span>โปรแกรม HTML Editor</span></a>
+                      
+                    </nav>
+                    
+                 </div>
+                 <section class="home-grid">
+
+                                  
+                    <div class="box-container">
+                 
+                       <div class="box">
+                          <h3 class="title">คำแนะนำรายวิชา</h3>
+                          <p class="likes">จำนวนผู้ถูกใจ : <span>25</span></p>
+                          <a href="#" class="inline-btn">ยอดไลค์</a>
+                          <p class="likes">คำแนะนำทั้งหมด : <span>12</span></p>
+                          <a href="#" class="inline-btn">แสดงคำแนะนำ</a>
+                          <p class="likes">บันทึก รายการ : <span>4</span></p>
+                          <a href="#" class="inline-btn">แสดงรายการ</a>
+                       </div>
+                 
+                     <!--  <div class="box">
+                          <h3 class="title">แคตล็อก</h3>
+                          <div class="flex">
+                             <a href="#"><i class="fas fa-code"></i><span>development</span></a>
+                             <a href="#"><i class="fas fa-chart-simple"></i><span>business</span></a>
+                             <a href="#"><i class="fas fa-pen"></i><span>design</span></a>
+                             <a href="#"><i class="fas fa-chart-line"></i><span>marketing</span></a>
+                             <a href="#"><i class="fas fa-music"></i><span>music</span></a>
+                             <a href="#"><i class="fas fa-camera"></i><span>photography</span></a>
+                             <a href="#"><i class="fas fa-cog"></i><span>software</span></a>
+                             <a href="#"><i class="fas fa-vial"></i><span>science</span></a>
+                          </div>
+                       </div>-->
+                 
+                       <div class="box">
+                          <h3 class="title">หัวข้อที่ได้รับความสนใจ</h3>
+                          <div class="flex">
+                             <a href="#"><i class="fab fa-html5"></i><span>HTML</span></a>
+                             <a href="#"><i class="fab fa-css3"></i><span>CSS</span></a>
+                             <a href="#"><i class="fab fa-js"></i><span>javascript</span></a>
+                             <a href="#"><i class="fab fa-react"></i><span>react</span></a>
+                             <a href="#"><i class="fab fa-php"></i><span>PHP</span></a>
+                             <a href="#"><i class="fab fa-bootstrap"></i><span>bootstrap</span></a>
+                          </div>
+                       </div>
+                 
+                       <div class="box">
+                          <h3 class="title">แนะนำการเรียน</h3>
+                          <p class="tutor">ห้องเรียนโค้ดดิ้ง สำหรับนักเรียนและผู้สนใจในการพัฒนาการโค้ดดิ้ง</p>
+                          <a href="#" class="inline-btn">เข้าสู่ห้องเรียน</a>
+                       </div>
+                 
+                    </div>
+                 
+                 </section>
+                 
+                 
+                 
+                 <section class="courses">
+                 
+                    <h1 class="heading">บทเรียน</h1>
+                 
+                    <div class="box-container">
+                 
+                       <div class="box">
+                          <div class="tutor">
+                             <img src="images/pic-2.jpg" alt="">
+                             <div class="info">
+                                <h3>ครูศิวพล</h3>
+                                <span>21-10-2024</span>
+                             </div>
+                          </div>
+                          <div class="thumb">
+                             <img src="images/thumb-1.png" alt="">
+                             <span>10 videos</span>
+                          </div>
+                          <h3 class="title">complete HTML tutorial</h3>
+                          <a href="online/html/content/p1.html" class="inline-btn">เข้าสู่ห้องเรียน</a>
+                       </div>
+                 
+                       <div class="box">
+                          <div class="tutor">
+                             <img src="images/pic-3.jpg" alt="">
+                             <div class="info">
+                                <h3>ครูศิวพล</h3>
+                                <span>21-10-2024</span>
+                             </div>
+                          </div>
+                          <div class="thumb">
+                             <img src="images/thumb-2.png" alt="">
+                             <span>10 videos</span>
+                          </div>
+                          <h3 class="title">complete CSS tutorial</h3>
+                          <a href="#" class="inline-btn">เข้าสู่ห้องเรียน</a>
+                       </div>
+                 
+                       <div class="box">
+                          <div class="tutor">
+                             <img src="images/pic-4.jpg" alt="">
+                             <div class="info">
+                                <h3>ครูศิวพล</h3>
+                                <span>21-10-2024</span>
+                             </div>
+                          </div>
+                          <div class="thumb">
+                             <img src="images/thumb-3.png" alt="">
+                             <span>10 videos</span>
+                          </div>
+                          <h3 class="title">complete JS tutorial</h3>
+                          <a href="#" class="inline-btn">เข้าสู่ห้องเรียน</a>
+                       </div>
+                 
+                       
+                 
+                       <div class="box">
+                          <div class="tutor">
+                             <img src="images/pic-6.jpg" alt="">
+                             <div class="info">
+                                <h3>ครูศิวพล</h3>
+                                <span>21-10-2024</span>
+                             </div>
+                          </div>
+                          <div class="thumb">
+                             <img src="images/thumb-5.png" alt="">
+                             <span>10 videos</span>
+                          </div>
+                          <h3 class="title">complete JQuery tutorial</h3>
+                          <a href="#" class="inline-btn">เข้าสู่ห้องเรียน</a>
+                       </div>
+                 
+                      
+                    </div>
+                 
+                    <div class="more-btn">
+                       <a href="online/html/content/p1.html" class="inline-option-btn">เข้าสู่ห้องเรียน</a>
+                    </div>
+                 
+                 </section>
+                                  
+                 <!-- custom js file link  -->
+                 <script src="js/script.js"></script>
+
+
+
+
+
+
+        
+
+  <!--ส่วนแสดงผลหน้าเว็บไซตหลักเมื่อผ่านการล็อกอิน------------------------------------------>
+
+
+
+
+          
+           <!--<iframe id="iframe" src="student/index.html" frameborder="0" ></iframe>-->
+       
+          <iframe id="iframe2" src="student/index.html" frameborder="0" ></iframe>
+          <iframe id="iframe3" src="class/editor2.html" frameborder="0" ></iframe>
+           
+        </div>
+
+
+
+  <div class="footer"  id="form-area2">
+
+    <p style="text-align: center;">  พัฒนาบน firebase 10.14.0 | Database | Authentication | Node.js | HTML  CSS </p>
+
+    <div id="modal" class="modal" >
+       <div class="spiner" style="padding: 20px ;margin: button 20px; text-align:center;font-size:large;"> กำลังเตรียมระบบกรุณารอสักครู่.. </div>
+      <div class="spinner"></div>
+   </div>
+
+    
+  </div>
+
+
+  
+
+
+
+
+
+
+
+    <script src="app.js" type="module"></script>
+
+
+
+
+
+    <script>
+        (function(d,t) {
+          var BASE_URL="https://app.chatwoot.com";
+          var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+          g.src=BASE_URL+"/packs/js/sdk.js";
+          g.defer = true;
+          g.async = true;
+          s.parentNode.insertBefore(g,s);
+          g.onload=function(){
+            window.chatwootSDK.run({
+              websiteToken: 'RSA56V3RNy4pJq9cuZSwbutL',
+              baseUrl: BASE_URL
+            })
+          }
+        })(document,"script");
+      </script>
+
+
+      <script>
+
+         
+
+
+      </script>
+
+
+
+</body>
+</html>
